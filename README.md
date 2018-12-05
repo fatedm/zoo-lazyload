@@ -6,7 +6,7 @@
 
 ##### 简单使用
 
-引入js: `<script src="https://sitecdn.zcy.gov.cn/zcy-front-other-upload/3f06ad2205c80c2b8201c3dc3e29b417.js"></script>`
+引入js: `<script src="https://cdn.zcy.gov.cn/zcy-front-other-upload/zoo-lazyload.min.js"></script>`
 
 Import: `import LazyLoad from 'zoo-lazyload'; `
 
