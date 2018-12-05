@@ -1,0 +1,22 @@
+{
+  "name": "zoo-lazyload",
+  "version": "1.0.1",
+  "author": "fatedm",
+  "description": "A fast, lightweight script to load images as they enter the viewport. SEO friendly, it supports responsive images (both srcset + sizes and picture) and progressive JPEG",
+  "scripts": {
+    "build": "uglifyjs zoo-lazyload.js -o zoo-lazyload.min.js"
+  },
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/fatedm/zoo-lazyload"
+	},
+  "files": [
+    "zoo-lazyload.js",
+    "zoo-lazyload.min.js"
+  ],
+  "main": "zoo-lazyload.js",
+  "devDependencies": {
+    "jshint": "^2.9.5",
+    "uglify-es": "^3.0.28"
+  }
+}
