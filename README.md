@@ -2,7 +2,7 @@
 
 政采云懒加载组件，轻松实现懒加载+图片优化.基于可配置的图片属性，实现自动添加阿里云cdn压缩后缀，支持webp。基于[vanilla-lazyload](https://www.andreaverlicchi.eu/lazyload/)8.17.0定制。
 
-##使用方法
+## 使用方法
 
 ##### 简单使用
 

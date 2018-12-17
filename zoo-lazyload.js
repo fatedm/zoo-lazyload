@@ -101,16 +101,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	function isInsideViewport(element, container, threshold) {
 		return !isBelowViewport(element, container, threshold) && !isAboveViewport(element, container, threshold) && !isAtRightOfViewport(element, container, threshold) && !isAtLeftOfViewport(element, container, threshold);
   }
-  
-  function checkWebp() {
-    try{
-        return (document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0);
-    }catch(err) {
-        return  false;
-    }
-  }
-
-  var isSupportWebp = checkWebp();
 
 	/* Creates instance and notifies it through the window element */
 	var createInstance = function createInstance(classObj, options) {
@@ -199,7 +189,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		element.setAttribute(attrName, replaceExtToWebp(value, toWebpFlag));
   };
   
-  var imgFileType = isSupportWebp ? 'webp' : 'jpg';
+  var imgFileType = supportsWebp ? 'webp' : 'jpg';
   var optPrefix = '?x-oss-process=image/';
 
   var getImgSuffix = function getImgSuffix(img, dprDefault) {
@@ -219,9 +209,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			// 如果是写明格式，转换为格式
 			if (dataFormat) {
 				if (/^(jpg|png)$/.test(dataFormat)) {
-					formatSuffix = '/format,' + (isSupportWebp ? 'webp' : dataFormat);
+					formatSuffix = '/format,' + (supportsWebp ? 'webp' : dataFormat);
 				} else {
-					formatSuffix = isSupportWebp ? '/format,webp' : '';
+					formatSuffix = supportsWebp ? '/format,webp' : '';
 				}
 			}
 
