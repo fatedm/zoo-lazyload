@@ -229,11 +229,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   };
 
   var addSuffix = function addSuffix(url, suffix) {
-    if (/cdn\.zcy\.gov\.cn/.test(url)) {
-        return url.split('?')[0] + suffix;
+		if(!url) {
+			return url;
+		}
+		var urlApp = url.split('?');
+    if (urlApp.length > 1) {
+        return urlApp[0] + suffix + '&' + urlApp[1];
     } else {
-        return url;
-    }
+        return url + suffix;
+		}
   };
 
 	var setSourcesImg = function setSourcesImg(element, settings) {
@@ -271,18 +275,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	};
 
 	var setSourcesBgImage = function setSourcesBgImage(element, settings) {
-		var toWebpFlag = supportsWebp && settings.to_webp;
 		var srcDataValue = getData(element, settings.data_src);
 		var bgDataValue = getData(element, settings.data_bg);
 
 		if (srcDataValue) {
-			var setValue = replaceExtToWebp(srcDataValue, toWebpFlag);
+			var suffix = getImgSuffix(element, settings.dpr);
+    	var setValue = addSuffix(srcDataValue, suffix);
 			element.style.backgroundImage = 'url("' + setValue + '")';
 		}
 
 		if (bgDataValue) {
-			var _setValue = replaceExtToWebp(bgDataValue, toWebpFlag);
-			element.style.backgroundImage = _setValue;
+			var _setValue = bgDataValue.replace(/url\(["|']?/g, '').replace(/["|']?\)/, '');
+			var suffix = getImgSuffix(element, settings.dpr);
+			var _setValue = addSuffix(_setValue, suffix);
+			element.style.backgroundImage = 'url("' + _setValue + '")';
 		}
 	};
 

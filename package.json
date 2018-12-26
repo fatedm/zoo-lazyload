@@ -1,6 +1,6 @@
 {
   "name": "@zcy/zoo-lazyload",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "fatedm",
   "description": "A fast, lightweight script to load images as they enter the viewport. SEO friendly, it supports responsive images (both srcset + sizes and picture) and progressive JPEG",
   "scripts": {
