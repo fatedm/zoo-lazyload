@@ -1,4 +1,4 @@
-# zoo-lazyload
+# @zcy/zoo-lazyload
 
 政采云懒加载组件，轻松实现懒加载+图片优化.基于可配置的图片属性，实现自动添加阿里云cdn压缩后缀，支持webp。基于[vanilla-lazyload](https://www.andreaverlicchi.eu/lazyload/)8.17.0定制。兼容IE9+及标准浏览器。
 
@@ -6,29 +6,60 @@
 * 包含大量图片的页面。
 * 图片保存在阿里cdn上。
 
+## DEMO
+
+[Examples](https://sitecdn.zcy.gov.cn/zcy-front-other-upload/eccac4a499a6232eb45ce06b23754f18.html)
+
 ## 使用方法
 
-##### 简单使用
+#### 引入
 
-引入js: `<script src="https://cdn.zcy.gov.cn/zcy-front-other-upload/zoo-lazyload.min.js"></script>`
+- ###### 简单使用
+  - html引入js:
 
-Import: `import LazyLoad from 'zoo-lazyload'; `
+    ```html
+    <script src="https://cdn.zcy.gov.cn/zcy-front-other-upload/zoo-lazyload.min.js"></script>
+    ```
 
-```html
-<img class="lazyload" data-src="https://sitecdn.zcy.gov.cn/zcy-front-other-upload/4b6ac189a0e1bd6ef4a38091a66f7a61.png" data-srcset="https://sitecdn.zcy.gov.cn/zcy-front-other-upload/4b6ac189a0e1bd6ef4a38091a66f7a61.png 2x" alt="图片名称" width="100" height="100" />
-```
+- ###### import
+
+    ```javascript
+    import LazyLoad from '@zcy/zoo-lazyload';
+	```
+
+
+
+#### html修改
+
+- 图片
+
+  ```html
+  <img class="lazyload" data-src="https://sitecdn.zcy.gov.cn/zcy-front-other-upload/4b6ac189a0e1bd6ef4a38091a66f7a61.png" data-srcset="https://sitecdn.zcy.gov.cn/zcy-front-other-upload/4b6ac189a0e1bd6ef4a38091a66f7a61.png 2x" alt="图片名称" width="100" height="100" />
+  ```
+
+- 背景图
+
+  ```html
+  <div class="lazyload" width="1000" height="500" data-src="https://sitecdn.zcy.gov.cn/zcy-front-other-upload/4b6ac189a0e1bd6ef4a38091a66f7a61.png"></div>
+  
+  <!-- 或者 -->
+  
+  <div class="lazyload" width="1000" height="500" data-bg="https://sitecdn.zcy.gov.cn/zcy-front-other-upload/4b6ac189a0e1bd6ef4a38091a66f7a61.png"></div>
+  ```
+
+
+
+#### 调用
 
 ```javascript
 // 传入需要懒加载的图片class
-new LazyLoad('.lazyload');
-// 或者
 new LazyLoad({
     elements_selector: '.lazyload',
-    dpr: 2,
 });
+// 如果是动态插入的图片，需要在图片插入DOM后手动调用new LazyLoad()
 ```
 
-##### [详细配置文档](https://www.andreaverlicchi.eu/lazyload/)
+## [详细配置文档](https://www.andreaverlicchi.eu/lazyload/)
 
 ### 详细配置
 * 图片/背景图
@@ -37,7 +68,7 @@ new LazyLoad({
     * **src**
         * 改为data-src，背景图可设置data-bg="url(图片地址)".
     * **srcset**
-        * 改为data-srcset。
+        * 改为data-srcset(背景图不可设置)。
     * **width、height**: 设置图片宽高
         * 读取width、height属性作为cdn压缩的后缀。
         * 不设置宽高的话，只可以压缩jpg格式的质量。
@@ -51,5 +82,20 @@ new LazyLoad({
     * **data-dpr**:  倍图设置
         * 设置data-dpr="2"来配置2倍或其他数字。
 
-#### 打包: npm run build
 
+
+## 常见问题
+
+- 图片没加载出来
+
+  - 核查js是否引入，class是否写错，是否调用new LazyLoad。
+
+  - 如果是背景图，确认调用方式如下
+
+    ```javascript
+    new LazyLoad({
+        elements_selector: '.lazyload',
+    });
+    ```
+
+  - 动态插入的图片需要在图片插入DOM后手动执行new LazyLoad。
