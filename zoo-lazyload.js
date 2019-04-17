@@ -196,12 +196,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			// 是否改变图片格式
 			var dataFormat = img.getAttribute('data-format');
 			var dpr = Number(img.getAttribute('data-dpr')) || dprDefault;
+			var dataL = img.getAttribute('data-l');
 			// 读取宽高
 			var width = parseInt(img.getAttribute('width')) * dpr;
 			var height = parseInt(img.getAttribute('height')) * dpr;
 			// 压缩质量
 			var q = parseInt(img.getAttribute('data-q'));
 			q = q >= 60 && q <= 100 ? q : 75;
+			// 补白
+			var isMPad = img.hasAttribute('data-m-pad');
+			var mPadStr = isMPad ? ',m_pad' : '';
+
+			// 颜色
+			var color = img.getAttribute('data-color');
+			var colorReg = /^[a-zA-Z0-9]{6}$/;
+
+			if (mPadStr && color && colorReg.test(color)) {
+				mPadStr = mPadStr + ',color_' + color;
+			}
 
 			// 格式后缀
 			var formatSuffix = "/format," + imgFileType;
@@ -215,14 +227,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				}
 			}
 
+			// 最长边
+			if (dataL) {
+				width = parseInt(dataL);
+				if (!isNaN(width)) {
+						return optPrefix + "resize,l_" + width + mPadStr + "/quality,Q_" + q + formatSuffix;
+				}
+			}
+
       if (!isNaN(width)) {
           if (!isNaN(height)) {
-              return optPrefix + "resize,m_fixed,h_" + height + ",w_" + width + "/quality,Q_" + q + formatSuffix;
+              return optPrefix + "resize,m_fixed,h_" + height + ",w_" + width + mPadStr  + "/quality,Q_" + q + formatSuffix;
           } else {
-              return optPrefix + "resize,w_" + width + "/quality,Q_" + q + formatSuffix;
+              return optPrefix + "resize,w_" + width  + mPadStr + "/quality,Q_" + q + formatSuffix;
           }
       } else if (!isNaN(height)) {
-          return optPrefix + "resize,h_" + height + "/quality,Q_" + q + formatSuffix;
+          return optPrefix + "resize,h_" + height + mPadStr + "/quality,Q_" + q + formatSuffix;
       } else {
         return optPrefix + "quality,Q_" + q + formatSuffix;
       }

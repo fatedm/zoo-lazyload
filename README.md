@@ -67,8 +67,12 @@ new LazyLoad({
         * 加lazyload class，此class为LazyLoad的elements_selector配置项。
     * **src**
         * 改为data-src，背景图可设置data-bg="url(图片地址)".
-    * **srcset**
-        * 改为data-srcset(背景图不可设置)。
+    * **data-l**
+        * 最大边
+    * **data-m-pad**
+        * data-l、width或height设置后，是否补白，默认补白为白色.
+    * **data-color**
+        * 当设置data-m-pad后，补白的十六进制颜色，如FF0000(必须6位，不支持3位缩写)。
     * **width、height**: 设置图片宽高
         * 读取width、height属性作为cdn压缩的后缀。
         * 不设置宽高的话，只可以压缩jpg格式的质量。
